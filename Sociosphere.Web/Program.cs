@@ -1,8 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using Sociosphere.Data.Entities;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+// Configure DbContext
+builder.Services.AddDbContext<SociosphereDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SociosphereDb"))
+);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
